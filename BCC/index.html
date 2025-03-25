@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Image Slider</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        
+        .slider-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .slide {
+            min-width: 100%;
+            position: relative;
+        }
+        
+        .slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ccc;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        
+        .slider-dot.active {
+            background: #333;
+        }
+        
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        .prev {
+            left: 10px;
+        }
+        
+        .next {
+            right: 10px;
+        }
+        
+        /* Grid View */
+        .grid-view {
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .grid-view img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .view-toggle {
+            display: block;
+            margin: 20px auto;
+            padding: 8px 15px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .slider-arrow {
+                width: 30px;
+                height: 30px;
+                font-size: 16px;
+            }
+            
+            .grid-view {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .grid-view {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slider">
+            <!-- Slide 1 -->
+            <div class="slide">
+                <img src="Screenshot 2025-03-25 223501.png" alt="">
+            </div>
+            
+        <!-- Slide 1 -->
+        <div class="slide">
+            <img src="Screenshot 2025-03-25 223539.png" alt="">
+        </div>
+        
+            <!-- Slide 1 -->
+            <div class="slide">
+                <img src="img1.jpg" alt="">
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="slide">
+                <img src="img2.jpg" alt="">
+            </div>
+            
+            <!-- Slide 3 -->
+            <div class="slide">
+                <img src="img3.jpg" alt="">
+            </div>
+            
+            <!-- Slide 4 -->
+            <div class="slide">
+                <img src="img4.jpg" alt="">
+            </div>
+            
+            <!-- Slide 5 -->
+            <div class="slide">
+                <img src="img5.jpg" alt="">
+            </div>
+            
+            <!-- Slide 6 -->
+            <div class="slide">
+                <img src="img6.jpg" alt="">
+            </div>
+            
+            <!-- Slide 7 -->
+            <div class="slide">
+                <img src="img7.jpg" alt="">
+            </div>
+        </div>
+        
+        <button class="slider-arrow prev">&#10094;</button>
+        <button class="slider-arrow next">&#10095;</button>
+        
+        <div class="slider-nav">
+            <div class="slider-dot active" data-index="0"></div>
+            <div class="slider-dot" data-index="1"></div>
+            <div class="slider-dot" data-index="2"></div>
+            <div class="slider-dot" data-index="3"></div>
+            <div class="slider-dot" data-index="4"></div>
+            <div class="slider-dot" data-index="5"></div>
+            <div class="slider-dot" data-index="6"></div>
+        </div>
+    </div>
+    
+    <button class="view-toggle">Show Grid View</button>
+    
+    <div class="grid-view">
+        <img src="" alt="">
+        <img src="" alt="">
+        <img src="" alt="">
+        <img src="" alt="">
+        <img src="" alt="">
+        <img src="" alt="">
+        <img src="" alt="">
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slider = document.querySelector('.slider');
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.slider-dot');
+            const prevBtn = document.querySelector('.prev');
+            const nextBtn = document.querySelector('.next');
+            const toggleBtn = document.querySelector('.view-toggle');
+            const gridView = document.querySelector('.grid-view');
+            
+            let currentIndex = 0;
+            const totalSlides = slides.length;
+            
+            function updateSlider() {
+                slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                // Update dots
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+            }
+            
+            // Navigation dots
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    currentIndex = parseInt(dot.getAttribute('data-index'));
+                    updateSlider();
+                });
+            });
+            
+            // Next button
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                updateSlider();
+            });
+            
+            // Previous button
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                updateSlider();
+            });
+            
+            // Auto-advance (optional)
+            // setInterval(() => {
+            //     currentIndex = (currentIndex + 1) % totalSlides;
+            //     updateSlider();
+            // }, 3000);
+            
+            // Toggle between slider and grid view
+            toggleBtn.addEventListener('click', () => {
+                if (gridView.style.display === 'grid') {
+                    gridView.style.display = 'none';
+                    toggleBtn.textContent = 'Show Grid View';
+                } else {
+                    gridView.style.display = 'grid';
+                    toggleBtn.textContent = 'Show Slider View';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
