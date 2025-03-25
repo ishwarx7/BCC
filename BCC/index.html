@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Image Slider</title>
+    <title>Device Showcase</title>
     <style>
         * {
             box-sizing: border-box;
@@ -16,11 +16,49 @@
             padding: 20px;
         }
         
+        /* Header Section */
+        .header-section {
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            text-align: center;
+        }
+        
+        .header-images {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .header-image {
+            width: 45%;
+            max-width: 500px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .header-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+        
+        /* Slider Section */
         .slider-container {
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 40px auto 0;
             position: relative;
             overflow: hidden;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
         }
         
         .slider {
@@ -35,8 +73,10 @@
         
         .slide img {
             width: 100%;
-            height: auto;
+            height: 400px;
             display: block;
+            object-fit: contain;
+            background: #f5f5f5;
         }
         
         .slider-nav {
@@ -91,7 +131,9 @@
         
         .grid-view img {
             width: 100%;
-            height: auto;
+            height: 200px;
+            object-fit: contain;
+            background: #f5f5f5;
             display: block;
         }
         
@@ -107,10 +149,24 @@
         }
         
         @media (max-width: 768px) {
+            .header-images {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .header-image {
+                width: 100%;
+                max-width: 100%;
+            }
+            
             .slider-arrow {
                 width: 30px;
                 height: 30px;
                 font-size: 16px;
+            }
+            
+            .slide img {
+                height: 300px;
             }
             
             .grid-view {
@@ -119,58 +175,71 @@
         }
         
         @media (max-width: 480px) {
+            .slide img {
+                height: 250px;
+            }
+            
             .grid-view {
                 grid-template-columns: 1fr;
+            }
+            
+            .grid-view img {
+                height: 180px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Header Section with Screenshots -->
+    <div class="header-section">
+        <h2 class="section-title">Device Overview</h2>
+        <div class="header-images">
+            <div class="header-image">
+                <img src="Screenshot 2025-03-25 223501.png" alt="Device Screenshot 1">
+            </div>
+            <div class="header-image">
+                <img src="Screenshot 2025-03-25 223539.png" alt="Device Screenshot 2">
+            </div>
+        </div>
+    </div>
+    
+    <!-- Slider Section -->
     <div class="slider-container">
+        <h2 class="section-title">Device Highlights</h2>
         <div class="slider">
             <!-- Slide 1 -->
-            <div class="">
-                <img src="Screenshot 2025-03-25 223501.png" alt="">
-            </div>
-            
-        <!-- Slide 1 -->
-        <div class="">
-            <img src="Screenshot 2025-03-25 223539.png" alt="">
-        </div>
-        
-            <!-- Slide 1 -->
             <div class="slide">
-                <img src="img1.jpg" alt="">
+                <img src="img1.jpg" alt="Device Highlight 1">
             </div>
             
             <!-- Slide 2 -->
             <div class="slide">
-                <img src="img2.jpg" alt="">
+                <img src="img2.jpg" alt="Device Highlight 2">
             </div>
             
             <!-- Slide 3 -->
             <div class="slide">
-                <img src="img3.jpg" alt="">
+                <img src="img3.jpg" alt="Device Highlight 3">
             </div>
             
             <!-- Slide 4 -->
             <div class="slide">
-                <img src="img4.jpg" alt="">
+                <img src="img4.jpg" alt="Device Highlight 4">
             </div>
             
             <!-- Slide 5 -->
             <div class="slide">
-                <img src="img5.jpg" alt="">
+                <img src="img5.jpg" alt="Device Highlight 5">
             </div>
             
             <!-- Slide 6 -->
             <div class="slide">
-                <img src="img6.jpg" alt="">
+                <img src="img6.jpg" alt="Device Highlight 6">
             </div>
             
             <!-- Slide 7 -->
             <div class="slide">
-<!--                 <img src="img7.jpg" alt=""> -->
+                <img src="img7.jpg" alt="Device Highlight 7">
             </div>
         </div>
         
@@ -191,13 +260,13 @@
     <button class="view-toggle">Show Grid View</button>
     
     <div class="grid-view">
-        <img src="" alt="">
-        <img src="" alt="">
-        <img src="" alt="">
-        <img src="" alt="">
-        <img src="" alt="">
-        <img src="" alt="">
-        <img src="" alt="">
+        <img src="img1.jpg" alt="Device Highlight 1">
+        <img src="img2.jpg" alt="Device Highlight 2">
+        <img src="img3.jpg" alt="Device Highlight 3">
+        <img src="img4.jpg" alt="Device Highlight 4">
+        <img src="img5.jpg" alt="Device Highlight 5">
+        <img src="img6.jpg" alt="Device Highlight 6">
+        <img src="img7.jpg" alt="Device Highlight 7">
     </div>
     
     <script>
